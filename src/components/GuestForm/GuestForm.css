@@ -1,0 +1,55 @@
+.head {
+  display: flex;
+  flex-direction: column;
+}
+
+.head p {
+  display: flex;
+  justify-content: center;
+  font-family: cursive;
+  font-size: 1.5rem;
+}
+
+.name {
+  display: flex;
+  margin: auto;
+  font-family: cursive;
+  font-size: 1.3rem;
+}
+
+.user-name {
+  margin-right: 10px;
+}
+
+.user-name-input {
+  font-family: cursive;
+}
+
+.entry {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: cursive;
+  font-size: 1.3rem;
+}
+
+.user-entry {
+  margin-right: 10px;
+}
+
+.sign {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  font-family: cursive;
+  font-size: 1rem;
+}
+
+.sign-out {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+  font-family: cursive;
+  font-size: 1rem;
+}

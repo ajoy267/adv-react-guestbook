@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEntry } from '../../context/EntryContext';
 import { useUser } from '../../context/UserContext';
+import './GuestForm.css';
 
 export default function GuestForm() {
   const [name, setName] = useState('');
@@ -27,14 +28,18 @@ export default function GuestForm() {
   };
 
   const guestName = (
-    <div>
-      <label>Guest Name: </label>
-      <input
-        type="text"
-        placeholder="Guest Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    <div className="head">
+      <p>Please Sign the Guest Book</p>
+      <div className="name">
+        <label className="user-name">Guest Name: </label>
+        <input
+          type="text"
+          placeholder="Guest Name"
+          className="user-name-input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
     </div>
   );
 
@@ -42,17 +47,24 @@ export default function GuestForm() {
     <div>
       <form onSubmit={handleSubmit}>
         {user ? null : guestName}
-        <div>
-          <label>Guest Entry: </label>
+        <div className="entry">
+          <label className="user-entry">Guest Entry: </label>
           <input
             type="text"
             placeholder="Your Entry"
+            className="user-name-input"
             value={userEntry}
             onChange={(e) => setUserEntry(e.target.value)}
           />
         </div>
-        <button type="submit">Sign</button>
-        {user ? <button onClick={handleNew}>Not {user}?</button> : null}
+        <button className="sign" type="submit">
+          Sign
+        </button>
+        {user ? (
+          <button className="sign-out" onClick={handleNew}>
+            Not {user}?
+          </button>
+        ) : null}
       </form>
     </div>
   );
