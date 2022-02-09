@@ -6,18 +6,24 @@ export default function GuestForm() {
   const [name, setName] = useState('');
   const [userEntry, setUserEntry] = useState('');
   const { user, setUser } = useUser();
-  const { entry, setEntry } = useEntry();
+  const { setEntry } = useEntry();
 
   function updateList() {
     if (!userEntry) return;
     setUser(name);
-    setEntry([...entry, { name, message: userEntry }]);
+    setEntry((prevState) => [...prevState, { name, message: userEntry }]);
     setUserEntry('');
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     updateList();
+  };
+
+  const handleNew = (e) => {
+    e.preventDefault();
+    setUser('');
+    setName('');
   };
 
   const guestName = (
@@ -46,6 +52,7 @@ export default function GuestForm() {
           />
         </div>
         <button type="submit">Sign</button>
+        {user ? <button onClick={handleNew}>Not {user}?</button> : null}
       </form>
     </div>
   );
