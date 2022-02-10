@@ -1,0 +1,21 @@
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+.each-message {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-name {
+  font-family: cursive;
+  font-size: 1.25rem;
+  margin-left: 20px;
+}
+
+.message-message {
+  font-family: cursive;
+  font-size: 1.25rem;
+  margin-left: 20px;
+}
