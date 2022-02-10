@@ -31,14 +31,16 @@ export default function GuestForm() {
     <div className="head">
       <p>Please Sign the Guest Book</p>
       <div className="name">
-        <label className="user-name">Guest Name: </label>
-        <input
-          type="text"
-          placeholder="Guest Name"
-          className="user-name-input"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <label className="user-name">
+          Guest Name:
+          <input
+            type="text"
+            placeholder="Guest Name"
+            className="user-name-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
       </div>
     </div>
   );
@@ -48,14 +50,16 @@ export default function GuestForm() {
       <form onSubmit={handleSubmit}>
         {user ? null : guestName}
         <div className="entry">
-          <label className="user-entry">Guest Entry: </label>
-          <input
-            type="text"
-            placeholder="Your Entry"
-            className="user-name-input"
-            value={userEntry}
-            onChange={(e) => setUserEntry(e.target.value)}
-          />
+          <label className="user-entry">
+            Guest Entry:
+            <input
+              type="text"
+              placeholder="Your Entry"
+              className="user-name-input"
+              value={userEntry}
+              onChange={(e) => setUserEntry(e.target.value)}
+            />
+          </label>
         </div>
         <button className="sign" type="submit">
           Sign

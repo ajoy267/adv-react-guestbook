@@ -10,13 +10,15 @@ test('should render header and guest form', () => {
   );
 
   const header = screen.getByText(/sign in friend/i);
-  const darkMode = screen.getByRole('button', { name: /dark mode/i });
+  const lightMode = screen.getByRole('button', { name: /☀/i });
+  const darkMode = screen.getByRole('button', { name: /☾/i });
   const instructions = screen.getByText(/please sign the guest book/i);
   const nameInput = screen.getByText(/guest name:/i);
   const entryInput = screen.getByText(/guest entry:/i);
   const signBtn = screen.getByRole('button', { name: /sign/i });
 
   expect(header).toBeInTheDocument();
+  expect(lightMode).toBeInTheDocument();
   expect(darkMode).toBeInTheDocument();
   expect(instructions).toBeInTheDocument();
   expect(nameInput).toBeInTheDocument();
