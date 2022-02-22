@@ -4,7 +4,23 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useState('');
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+
+  const login = (username, password) => {
+    const loginSuccesful =
+      username === process.env.AUTH_USERNAME && password === process.env.AUTH_PASSWORD;
+
+    if (loginSuccesful) setUser({ username });
+    return loginSuccesful;
+  };
+
+  const logout = (callback) => {
+    setUser('');
+    callback();
+  };
+
+  return (
+    <UserContext.Provider value={{ user, setUser, login, logout }}>{children}</UserContext.Provider>
+  );
 }
 
 function useUser() {
