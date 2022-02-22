@@ -1,37 +1,53 @@
 import React, { useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
-import { useForm } from '../../hooks/useForm';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export default function LoginForm() {
-  const [error, setError] = useState('');
-  const user = useUser();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const { setUser } = useUser();
   const history = useHistory();
   const location = useLocation();
-  const { formState, handleFormChange } = useForm({ username: '', password: '' });
+  const [error, setError] = useState('');
+
   const { from } = location.state || { from: { pathname: '/' } };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const loginWasSuccessful = user.login(formState.username, formState.password);
-
-    {
-      loginWasSuccessful
-        ? history.replace(from.pathname)
-        : setError('Login was unsuccessful, Please try again');
+    if (
+      name === process.env.REACT_APP_AUTH_USERNAME &&
+      password === process.env.REACT_APP_AUTH_PASSWORD
+    ) {
+      setUser({ username: name, password: password });
+      setName('');
+      setPassword('');
+      history.replace(from.pathname);
+    } else {
+      setError('Login unsuccesful, Please try again.');
     }
   };
+
   return (
     <main>
       <h4>Sign In</h4>
       <form onSubmit={handleLogin}>
         <label>
           Username:
-          <input id="username" name="username" type="username" onChange={handleFormChange} />
+          <input
+            type="text"
+            placeholder="username"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </label>
         <label>
           Password
-          <input id="password" name="password" type="password" onChange={handleFormChange} />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
         <button type="submit" aria-label="sign in">
           Sign In

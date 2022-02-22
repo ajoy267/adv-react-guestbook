@@ -4,14 +4,14 @@ import { useUser } from '../../context/UserContext';
 import './GuestForm.css';
 
 export default function GuestForm() {
-  const [name, setName] = useState('');
+  const [name] = useState('');
   const [userEntry, setUserEntry] = useState('');
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const { setEntry } = useEntry();
 
   function updateList() {
     if (!userEntry) return;
-    setUser(name);
+
     setEntry((prevState) => [...prevState, { name, message: userEntry }]);
     setUserEntry('');
   }
@@ -21,34 +21,9 @@ export default function GuestForm() {
     updateList();
   };
 
-  const handleNew = (e) => {
-    e.preventDefault();
-    setUser('');
-    setName('');
-  };
-
-  const guestName = (
-    <div className="head">
-      <p>Please Sign the Guest Book</p>
-      <div className="name">
-        <label className="user-name">
-          Guest Name:
-          <input
-            type="text"
-            placeholder="Guest Name"
-            className="user-name-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-      </div>
-    </div>
-  );
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {user ? null : guestName}
         <div className="entry">
           <label className="user-entry">
             Guest Entry:
@@ -64,11 +39,7 @@ export default function GuestForm() {
         <button className="sign" type="submit">
           Sign
         </button>
-        {user ? (
-          <button className="sign-out" onClick={handleNew}>
-            Not {user}?
-          </button>
-        ) : null}
+        {user ? <button className="sign-out">Not {user}?</button> : null}
       </form>
     </div>
   );
