@@ -18,7 +18,7 @@ export default function LoginForm() {
       name === process.env.REACT_APP_AUTH_USERNAME &&
       password === process.env.REACT_APP_AUTH_PASSWORD
     ) {
-      setUser({ username: name, password: password });
+      setUser(name);
       setName('');
       setPassword('');
       history.replace(from.pathname);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useEntry } from '../../context/EntryContext';
 import { useUser } from '../../context/UserContext';
 import './GuestForm.css';
@@ -6,8 +7,9 @@ import './GuestForm.css';
 export default function GuestForm() {
   const [name] = useState('');
   const [userEntry, setUserEntry] = useState('');
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { setEntry } = useEntry();
+  const history = useHistory();
 
   function updateList() {
     if (!userEntry) return;
@@ -19,6 +21,12 @@ export default function GuestForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateList();
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    setUser('');
+    history.push('/login');
   };
 
   return (
@@ -39,7 +47,11 @@ export default function GuestForm() {
         <button className="sign" type="submit">
           Sign
         </button>
-        {user ? <button className="sign-out">Not {user}?</button> : null}
+        {user ? (
+          <button className="sign-out" onClick={handleLogout}>
+            Not {user}?
+          </button>
+        ) : null}
       </form>
     </div>
   );
