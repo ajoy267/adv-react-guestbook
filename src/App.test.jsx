@@ -1,29 +1,25 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import App from './App';
+import { EntryProvider } from './context/EntryContext';
 import { UserProvider } from './context/UserContext';
 
-test('renders learn react link', () => {
-  render(
+test('should render login page', () => {
+  const container = render(
     <UserProvider>
-      <App />
+      <EntryProvider>
+        <App />
+      </EntryProvider>
     </UserProvider>
   );
 
-  const nameInput = screen.getByRole('textbox', { name: /Guest Name:/i });
-  const personName = 'Andrew';
-  userEvent.type(nameInput, personName);
+  const header = screen.getByRole('heading', { name: /sign in/i });
+  const username = screen.getByRole('textbox', { name: /username:/i });
+  const password = screen.getByLabelText(/password/i);
+  const signInBtn = screen.getByLabelText(/password/i);
 
-  const entryInput = screen.getByRole('textbox', { name: /Guest Entry:/i });
-  const personEntry = 'Hello';
-  userEvent.type(entryInput, personEntry);
-
-  const signBtn = screen.getByRole('button', { name: /sign/i });
-  userEvent.click(signBtn);
-
-  const person = screen.getByText(/andrew:/i);
-  const entry = screen.getByText(/hello/i);
-
-  expect(person).toBeInTheDocument();
-  expect(entry).toBeInTheDocument();
+  expect(header).toBeInTheDocument();
+  expect(username).toBeInTheDocument();
+  expect(password).toBeInTheDocument();
+  expect(signInBtn).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });
